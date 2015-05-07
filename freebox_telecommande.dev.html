@@ -108,6 +108,9 @@
 $(function(){
     var pressTimer, already_press;
     
+    //numéro du player à controlé, 1 si vous n'en avez qu'un
+    var numero_du_player = 1;
+
     //mettre son code de télécommande
     var code_telecommande = 5818261;
 
@@ -146,7 +149,7 @@ $(function(){
         long_press = long_press || false;
         long_press = (long_press)? "true" : "false";
 
-        var url = "http://hd1.freebox.fr/pub/remote_control?code="+code_telecommande+"&key="+key+"&long="+long_press; 
+        var url = "http://hd"+numero_du_player+".freebox.fr/pub/remote_control?code="+code_telecommande+"&key="+key+"&long="+long_press; 
         $.get(url)
         .fail(function(){
 
