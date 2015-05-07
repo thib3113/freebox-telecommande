@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Controle de sa freebox par html</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<style>
+    #telecommande{
+        background:#e6e6e6;
+        width: 200px;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 30pt;
+        padding:20px;
+    }
+    .pt17{
+        font-size: 17pt;
+        line-height: 2.2em;
+    }
+    .pt12{
+        font-size: 12pt;
+        line-height: 3.2em;
+    }
+
+    #croix .ok, .av{
+        font-size: 22pt;
+        line-height: 1.6em;
+        font-weight: bolder;
+    }
+    #top, #media{
+        height:50px;
+    }
+    #pave_num{
+        height:200px;
+    }
+    #plus_moins{
+        height:150px;
+    }
+    #pave_num{
+        clear: both;
+    }
+    .button{
+        width:50px;
+        height: 50px;
+        float: left;
+    }
+
+    .button:hover, #boutton_free:hover{
+        background: #525252;
+        color:white;
+    }
+
+    .button.no_hover:hover{
+        background: initial;
+        color:initial;
+    }
+
+    .button.right{
+        float:right;
+    }
+    #boutton_free{
+        font-weight: bolder;
+        color:red;
+        height: 50px;
+    }
+    #croix{
+        height:150px;
+    }
+
+    #media, #croix{
+        clear: both;
+    }
+
+    #croix > div {
+        height: 50px;
+    }
+    
+    .undo, .search{
+        height: 100%;
+        width: 100%;
+        line-height: 1.3em;
+    }
+    .undo{
+        background: red;
+    }
+    .search{
+        background: blue;
+    }
+
+    #croix .menu{
+        background: green;   
+    }
+    #croix .info{
+        background: yellow;
+    }
+    #croix .info:hover{
+        background: #ffc41b;
+    }
+    .button:not(.no_hover), #boutton_free{
+        cursor: pointer;
+    }
+    #theFrame{
+        width:0;
+        height:0;
+    }
+</style>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+$(function(){
+    var pressTimer, already_press;
+    
+    //mettre son code de télécommande
+    var code_telecommande = 5818261;
+
+
+
+    $("[data-navigation]").mouseup(function(){
+        clearTimeout(pressTimer)
+        if(already_press) return false;
+
+        select_press = $(this).data("navigation");
+
+        // Clear timeout
+        console.log("short press : "+select_press);
+        sendToFreebox(select_press, false);
+        
+        return false;
+    }).mousedown(function(){
+        var parent = this;
+        already_press = false;
+        // Set timeout
+        
+        pressTimer = window.setTimeout(function() {
+                
+                short_press = $(parent).data("navigation");
+                lg_press = $(parent).data("lg-press");
+                already_press = true;
+
+                select_press = lg_press || short_press;
+                console.log("long press : "+select_press);
+                sendToFreebox(select_press, true);
+            },1000)
+        return false; 
+    });
+
+    function sendToFreebox(key, long_press){
+        long_press = long_press || false;
+        long_press = (long_press)? "true" : "false";
+
+        var url = "http://hd1.freebox.fr/pub/remote_control?code="+code_telecommande+"&key="+key+"&long="+long_press; 
+        $.get(url)
+        .fail(function(){
+
+        })
+    }
+});
+</script>
+</head>
+<body>
+    <div id="telecommande">
+        <div id="top">
+            <span data-navigation="list" class="left button av">AV</span>
+            <span data-navigation="power" class="right button"><i class="fa fa-power-off"></i></span>
+        </div>
+        <div id="pave_num">
+            <div>
+                <div class="button" data-navigation="1">1</div>
+                <div class="button" data-navigation="2">2</div>
+                <div class="button" data-navigation="3">3</div>
+            </div>
+            <div>
+                <div class="button" data-navigation="4">4</div>
+                <div class="button" data-navigation="5">5</div>
+                <div class="button" data-navigation="6">6</div>
+            </div>
+            <div>
+                <div class="button" data-navigation="7">7</div>
+                <div class="button" data-navigation="8">8</div>
+                <div class="button" data-navigation="9">9</div>
+            </div>
+            <div>
+                <div class="button no_hover">&nbsp;</div>
+                <div class="button" data-navigation="0">0</div>
+                <div class="button no_hover">&nbsp;</div>
+            </div>
+        </div>
+        <div id="croix">
+            <div>
+                <div class="button" data-navigation="red"><i class="fa fa-undo undo"></i></div>
+                <div class="button" data-navigation="up"><i class="fa fa-caret-up"></i></div>
+                <div class="button" data-navigation="blue"><i class="fa fa-search search"></i></div>
+            </div>
+            <div>
+                <div class="button" data-navigation="left"><i class="fa fa-caret-left"></i></div>
+                <div class="button ok" data-navigation="ok">OK</div>
+                <div class="button" data-navigation="right"><i class="fa fa-caret-right"></i></div>
+            </div>
+            <div>
+                <div class="button menu" data-navigation="green">M</div>
+                <div class="button" data-navigation="down"><i class="fa fa-caret-down"></i></div>
+                <div class="button info" data-navigation="yellow">I</div>
+            </div>
+        </div>
+        <div id="boutton_free" data-navigation="home">
+            Free
+        </div>
+        <div id="plus_moins">
+            <div id="volume" class="button no_hover">
+                <div class="button" data-navigation="vol_inc">+</div>
+                <div class="button pt17 no_hover">VOL</div>
+                <div class="button" data-navigation="vol_dec">-</div>
+            </div>
+            <div id="mid" class="button no_hover">
+                <i class="button fa fa-volume-off" data-navigation="mute"></i>
+                <span class="button no_hover"></span>
+                <i class="button fa fa-circle" data-navigation="rec" style="color:red;"></i>
+            </div>
+            <div id="prog" class="button no_hover">
+                <div class="button" data-navigation="prgm_inc">+</div>
+                <div class="button pt12 no_hover">PROG</div>
+                <div class="button" data-navigation="prgm_dec">-</div>
+            </div>
+        </div>
+        <div id="media">
+            <i class="fa fa-backward button" data-lg-press="bwd" data-navigation="prev"></i>
+            <i class="fa fa-play button" data-navigation="play"></i>
+            <!-- <i class="fa fa-pause"></i> -->
+            <i class="fa fa-forward button" data-lg-press="fwd" data-navigation="next"></i>
+        </div>
+    </div>
+</body>
+</html>
