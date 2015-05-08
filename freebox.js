@@ -1,49 +1,70 @@
-    var pressTimer, already_press;
-    
-    //numéro du player à controlé, 1 si vous n'en avez qu'un
-    var numero_du_player = 1;
-
-    //mettre son code de télécommande
-    var code_telecommande = 5818261;
+var FreeboxTVKeys = {
+    RED : "red", // Bouton rouge
+    GREEN : "green", // Bouton vert
+    BLUE : "blue", // Bouton bleu
+    YELLOW : "yellow", // Bouton jaune
 
 
+    POWER : "power", // Bouton Power
+    LIST : "list", // liste of channel
+    TV : "tv", // Bouton tv
 
-    $("[data-navigation]").mouseup(function(){
-        clearTimeout(pressTimer)
-        if(already_press) return false;
+    NUM_0 : "0", // Bouton 0
+    NUM_1 : "1", // Bouton 1
+    NUM_2 : "2", // Bouton 2
+    NUM_3 : "3", // Bouton 3
+    NUM_4 : "4", // Bouton 4
+    NUM_5 : "5", // Bouton 5
+    NUM_6 : "6", // Bouton 6
+    NUM_7 : "7", // Bouton 7
+    NUM_8 : "8", // Bouton 8
+    NUM_9 : "9", // Bouton 9
 
-        select_press = $(this).data("navigation");
-        sendToFreebox(select_press, false);
-        
-        return false;
-    }).mousedown(function(){
-        var parent = this;
-        already_press = false;
+    BACK : "back", // Bouton jaune (retour)
+    SWAP : "swap", // Bouton swap
 
-        pressTimer = window.
-        setTimeout(function() {
-                short_press = $(parent).data("navigation");
-                lg_press = $(parent).data("lg-press");
-                already_press = true;
+    INFO : "info", // Bouton info
+    EPG : "epg", // Bouton epg (fct+)
+    MAIL : "mail", // Bouton mail
+    MEDIA : "media", // Bouton media (fct+)
+    HELP : "help", // Bouton help
+    OPTIONS : "options", // Bouton options (fct+)
+    PIP : "pip", // Bouton pip
 
-                select_press = lg_press || short_press;
-                console.log("long press : "+select_press);
-                sendToFreebox(select_press, true);
-            },1000);
+    VOL_INC : "vol_inc", // Bouton volume +
+    VOL_DEC : "vol_dec", // Bouton volume -
 
-        return false; 
-    });
+    OK : "ok", // Bouton ok
+    UP : "up", // Bouton haut
+    RIGHT : "right", // Bouton droite
+    DOWN : "down", // Bouton bas
+    LEFT : "left", // Bouton gauche
 
-var Freebox = function(id_player, code_telecommande){
+    PRGM_INC : "prgm_inc", //Bouton programme +
+    PRGM_DEC : "prgm_dec", // Bouton programme -
 
-    var send = function(key, long_press){
+    MUTE : "mute", // Bouton sourdine
+    HOME : "home", // Bouton Free
+    REC : "rec", // Bouton Rec
+
+    BWD : "bwd", // Bouton << retour arrière
+    PREV : "prev", // Bouton |<< précédent
+    PLAY : "play", // Bouton Lecture / Pause
+    FWD : "fwd", // Bouton >> avance rapide
+    NEXT : "next" // Bouton >>| suivant
+};
+
+function Freebox(id_player, code_telecommande){
+
+    var send = function(key, long_press, repeat){
         long_press = long_press || false;
         long_press = (long_press)? "true" : "false";
 
-        var url = "http://hd"+this.id_player+".freebox.fr/pub/remote_control?code="+this.code_telecommande+"&key="+key+"&long="+long_press; 
+        repeat = repeat || 1;
+
+        var url = "http://hd"+this.id_player+".freebox.fr/pub/remote_control?code="+this.code_telecommande+"&key="+key+"&long="+long_press+"&repeat="+repeat; 
         $.get(url)
         .fail(function(){
-
         });
     }
 
@@ -54,5 +75,8 @@ var Freebox = function(id_player, code_telecommande){
     var setTelecommandCode = function(code_telecommande){
         this.code_telecommande = code_telecommande;
     }
+    
+    var pressTimer;
+    var already_press;
 
 }
