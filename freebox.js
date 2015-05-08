@@ -34,7 +34,7 @@
         return false; 
     });
 
-var Freebox(id_player, code_telecommande){
+var Freebox = function(id_player, code_telecommande){
 
     var send = function(key, long_press){
         long_press = long_press || false;
