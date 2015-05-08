@@ -54,6 +54,10 @@ var FreeboxTVKeys = {
     NEXT : "next" // Bouton >>| suivant
 };
 
+function isInt(n){
+        return Number(n)===n && n%1===0;
+}
+
 function Freebox(id_player, code_telecommande){
 
     this.press = function(key, long_press, repeat){
@@ -63,14 +67,20 @@ function Freebox(id_player, code_telecommande){
         repeat = repeat || 1;
 
         var url = "http://hd"+this.id_player+".freebox.fr/pub/remote_control?code="+this.code_telecommande+"&key="+key+"&long="+long_press+"&repeat="+repeat; 
-        $.ajax({
-          method: "GET",
-          url: url,
-          crossDomain: true
-        })
-        .done(function( msg ) {
-            console.log("send");
+        xhr = $.ajax({
+            method: "GET",
+            url: url,
+            crossDomain: true,
+            statusCode: {
+                500: function() {
+                    alert("Une erreur s'est produite !");
+                    }
+            }
         });
+        // for (var i = 1; i < repeat; i++) {
+        //     xhr
+        // };
+
     }
 
     this.setHDplayer = function(id_player){

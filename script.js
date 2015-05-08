@@ -12,7 +12,7 @@ $(function(){
     var maFreebox = new Freebox(numero_du_player, code_telecommande);
 
 
-    $("[data-navigation]").mouseup(function(){
+    $("[data-navigation]").on("mouseup touchend", function(){
         clearTimeout(pressTimer)
         if(already_press) return false;
 
@@ -20,7 +20,7 @@ $(function(){
         maFreebox.press(select_press, false);
         
         return false;
-    }).mousedown(function(){
+    }).on("mousedown touchstart", function(){
         var parent = this;
         already_press = false;
 
