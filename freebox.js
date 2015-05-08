@@ -55,7 +55,4 @@ var Freebox(id_player, code_telecommande){
         this.code_telecommande = code_telecommande;
     }
 
-    
-
-
 }
