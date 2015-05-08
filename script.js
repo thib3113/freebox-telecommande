@@ -9,7 +9,7 @@ $(function(){
 
     //mettre son code de télécommande
     var code_telecommande = 5818261;
-    var freebox = new Freebox(numero_du_player, code_telecommande);
+    var maFreebox = new Freebox(numero_du_player, code_telecommande);
 
 
     $("[data-navigation]").mouseup(function(){
@@ -17,7 +17,7 @@ $(function(){
         if(already_press) return false;
 
         select_press = $(this).data("navigation");
-        freebox.send(select_press, false);
+        maFreebox.press(select_press, false);
         
         return false;
     }).mousedown(function(){
@@ -32,7 +32,7 @@ $(function(){
 
                 select_press = lg_press || short_press;
                 console.log("long press : "+select_press);
-                freebox.send(select_press, true);
+                maFreebox.press(select_press, true);
             },1000);
 
         return false; 

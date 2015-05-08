@@ -56,28 +56,35 @@ var FreeboxTVKeys = {
 
 function Freebox(id_player, code_telecommande){
 
-    var send = function(key, long_press, repeat){
+    this.press = function(key, long_press, repeat){
         long_press = long_press || false;
         long_press = (long_press)? "true" : "false";
 
         repeat = repeat || 1;
 
         var url = "http://hd"+this.id_player+".freebox.fr/pub/remote_control?code="+this.code_telecommande+"&key="+key+"&long="+long_press+"&repeat="+repeat; 
-        $.get(url)
-        .fail(function(){
+        $.ajax({
+          method: "GET",
+          url: url,
+          crossDomain: true
+        })
+        .done(function( msg ) {
+            console.log("send");
         });
     }
 
-    var setHDplayer = function(id_player){
+    this.setHDplayer = function(id_player){
         this.id_player = id_player;
     }
 
-    var setTelecommandCode = function(code_telecommande){
+    this.setTelecommandCode = function(code_telecommande){
         this.code_telecommande = code_telecommande;
     }
-    
+   
     this.id_player = id_player;
     this.code_telecommande = code_telecommande;
+
+    console.log(this);
 
 
 }
