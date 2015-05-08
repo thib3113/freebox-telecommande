@@ -76,7 +76,8 @@ function Freebox(id_player, code_telecommande){
         this.code_telecommande = code_telecommande;
     }
     
-    var pressTimer;
-    var already_press;
+    this.id_player = id_player;
+    this.code_telecommande = code_telecommande;
+
 
 }

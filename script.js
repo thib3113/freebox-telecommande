@@ -1,10 +1,15 @@
 $(function(){
-        //numéro du player à controlé, 1 si vous n'en avez qu'un
+
+
+    var pressTimer;
+    var already_press;
+
+    //numéro du player à controlé, 1 si vous n'en avez qu'un
     var numero_du_player = 1;
 
     //mettre son code de télécommande
     var code_telecommande = 5818261;
-    var freebox = new Freebox(1, code_telecommande);
+    var freebox = new Freebox(numero_du_player, code_telecommande);
 
 
     $("[data-navigation]").mouseup(function(){
