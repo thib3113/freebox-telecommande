@@ -1,0 +1,98 @@
+#telecommande{
+        background:#e6e6e6;
+        width: 200px;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 30pt;
+        padding:20px;
+    }
+    .pt17{
+        font-size: 17pt;
+        line-height: 2.2em;
+    }
+    .pt12{
+        font-size: 12pt;
+        line-height: 3.2em;
+    }
+
+    #croix .ok, .av{
+        font-size: 22pt;
+        line-height: 1.6em;
+        font-weight: bolder;
+    }
+    #top, #media{
+        height:50px;
+    }
+    #pave_num{
+        height:200px;
+    }
+    #plus_moins{
+        height:150px;
+    }
+    #pave_num{
+        clear: both;
+    }
+    .button{
+        width:50px;
+        height: 50px;
+        float: left;
+    }
+
+    .button:hover, #boutton_free:hover{
+        background: #525252;
+        color:white;
+    }
+
+    .button.no_hover:hover{
+        background: initial;
+        color:initial;
+    }
+
+    .button.right{
+        float:right;
+    }
+    #boutton_free{
+        font-weight: bolder;
+        color:red;
+        height: 50px;
+    }
+    #croix{
+        height:150px;
+    }
+
+    #media, #croix{
+        clear: both;
+    }
+
+    #croix > div {
+        height: 50px;
+    }
+    
+    .undo, .search{
+        height: 100%;
+        width: 100%;
+        line-height: 1.3em;
+    }
+    .undo{
+        background: red;
+    }
+    .search{
+        background: blue;
+    }
+
+    #croix .menu{
+        background: green;   
+    }
+    #croix .info{
+        background: yellow;
+    }
+    #croix .info:hover{
+        background: #ffc41b;
+    }
+    .button:not(.no_hover), #boutton_free{
+        cursor: pointer;
+    }
+    #theFrame{
+        width:0;
+        height:0;
+    }

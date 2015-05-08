@@ -1,0 +1,18 @@
+CACHE MANIFEST
+# v0.1 05/05/2015
+CACHE:
+index.html
+index.min.html
+script.min.js
+freebox.min.js
+https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?v=4.3.0
+https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.svg?v=4.3.0
+https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf?v=4.3.0
+https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff?v=4.3.0
+https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff2?v=4.3.0
+
+NETWORK:
+*
+
+FALLBACK:
+index.html index.min.html
