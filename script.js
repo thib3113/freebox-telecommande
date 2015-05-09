@@ -8,18 +8,19 @@ $(function(){
     var numero_du_player = 1;
 
     //mettre son code de télécommande
+    //5818261
     var code_telecommande = localStorage.getItem("code_telecommande") || null;
 
     if(code_telecommande === null){
         do{
-            code_tel = prompt("Merci de rentrer votre code télécommande freebox .");
-            localStorage.setItem("code_telecommande", code_tel);            
+            code_telecommande = prompt("Merci de rentrer votre code télécommande freebox .");
+            localStorage.setItem("code_telecommande", code_telecommande);            
         }
-        while(!parseInt(code_tel));
+        while(!parseInt(code_telecommande));
         
     }
 
-    
+
 
 
     var maFreebox = new Freebox(numero_du_player, code_telecommande);
