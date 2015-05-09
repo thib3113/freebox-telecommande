@@ -67,6 +67,26 @@ function Freebox(id_player, code_telecommande){
         repeat = repeat || 1;
 
         var url = "http://hd"+this.id_player+".freebox.fr/pub/remote_control?code="+this.code_telecommande+"&key="+key+"&long="+long_press+"&repeat="+repeat; 
+
+        if(repeat > 1)
+            this.repeat(url, repeat);
+        else
+            this.sendToFreebox(url);
+
+    }
+
+    this.repeat = function(url, nb){
+        nb = nb-1;
+
+        console.log("repeat");
+
+        if(nb>0)
+            setTimeout(this.repeat, 500, url, nb);
+
+        this.sendToFreebox(url);
+    }
+
+    this.sendToFreebox = function(url){
         xhr = $.ajax({
             method: "GET",
             url: url,
@@ -77,10 +97,6 @@ function Freebox(id_player, code_telecommande){
                     }
             }
         });
-        // for (var i = 1; i < repeat; i++) {
-        //     xhr
-        // };
-
     }
 
     this.setHDplayer = function(id_player){
@@ -89,6 +105,10 @@ function Freebox(id_player, code_telecommande){
 
     this.setTelecommandCode = function(code_telecommande){
         this.code_telecommande = code_telecommande;
+    }
+
+    this.setChannel = function(number){
+
     }
    
     this.id_player = id_player;
