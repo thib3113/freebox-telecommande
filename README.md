@@ -6,7 +6,7 @@ Utilisation
 
 Cette petite page vous permet de remplacer votre télécommande physique .
 
-Pour l'utiliser lancer la page :  **freebox_telecommande.min.html** dans votre navigateur favoris
+Pour l'utiliser lancer la page :  **freebox_telecommande.min.html** dans votre navigateur favoris, ou allez sur la page : http://thib3113.github.io/freebox-telecommande/ 
 
 Ce script fonctionne avec l'api **3.0** de la freebox Révolution ( V6 ), il necessite d'être connecté sur le réseau de la freebox, et nécessite une connection à internet .
 
