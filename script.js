@@ -8,7 +8,6 @@ $(function(){
     var numero_du_player = 1;
 
     //mettre son code de télécommande
-    //5818261
     var code_telecommande = localStorage.getItem("code_telecommande") || null;
 
     if(code_telecommande === null){
@@ -20,7 +19,9 @@ $(function(){
         
     }
 
-
+    $("body").on("keydown",function(event){
+        $('[data-keycode='+event.which+']').trigger("mouseup");
+    })
 
 
     var maFreebox = new Freebox(numero_du_player, code_telecommande);
